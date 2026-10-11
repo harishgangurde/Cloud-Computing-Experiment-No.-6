@@ -1,75 +1,779 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Student Portfolio</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            color: #1e293b;
-            text-align: center;
-        }
-        header {
-            background: #2563eb;
-            color: white;
-            padding: 45px 20px;
-        }
-        main {
-            max-width: 650px;
-            margin: 35px auto;
-            padding: 25px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px #cbd5e1;
-        }
-        h2 {
-            color: #2563eb;
-        }
-        .button {
-            display: inline-block;
-            background: #2563eb;
-            color: white;
-            padding: 12px 22px;
-            border-radius: 8px;
-            text-decoration: none;
-        }
-        footer {
-            padding: 20px;
-            color: #64748b;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070711">
+<meta name="description" content="The futuristic portfolio of Harish Gangurde — developer, engineer and cloud enthusiast.">
+<title>Harish Gangurde | Digital Portfolio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #070711;
+  --panel: rgba(255,255,255,.035);
+  --line: rgba(255,255,255,.10);
+  --text: #f4f2ff;
+  --muted: #9695ad;
+  --purple: #a78bfa;
+  --cyan: #67e8f9;
+  --pink: #f0abfc;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 15% 15%, #5729a51c, transparent 35%),
+    radial-gradient(ellipse at 85% 45%, #126a8020, transparent 35%),
+    radial-gradient(ellipse at 50% 100%, #65248c16, transparent 35%);
+}
+
+a { color: inherit; text-decoration: none; }
+
+.container { width: min(1120px, 90%); margin: auto; }
+
+.mono {
+  font-family: 'DM Mono', monospace;
+  font-size: .76rem;
+  letter-spacing: .06em;
+}
+
+.gradient {
+  background: linear-gradient(110deg, #fff 5%, var(--purple) 48%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #070711d9;
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo { font-size: 1.2rem; font-weight: 700; letter-spacing: -.06em; }
+.logo span { color: var(--cyan); }
+
+.nav-links { display: flex; align-items: center; gap: 27px; }
+.nav-links a { color: var(--muted); font-size: .87rem; transition: color .2s; }
+.nav-links a:hover { color: white; }
+
+.nav-cta, .button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid #a78bfa65;
+  background: linear-gradient(120deg, #a78bfa20, #67e8f908);
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: white;
+  font-size: .87rem;
+  font-weight: 600;
+  transition: transform .2s, border-color .2s, background .2s;
+}
+
+.button.primary {
+  color: #090914;
+  background: linear-gradient(110deg, #c4b5fd, #67e8f9);
+  border: none;
+}
+
+.button:hover, .nav-cta:hover {
+  transform: translateY(-3px);
+  border-color: var(--cyan);
+}
+
+.menu-button {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: white;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1.2rem;
+}
+
+.hero {
+  min-height: 650px;
+  display: grid;
+  grid-template-columns: 1.12fr .88fr;
+  align-items: center;
+  gap: 45px;
+  padding-top: 70px;
+  padding-bottom: 85px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--cyan);
+  margin-bottom: 26px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #86efac;
+  box-shadow: 0 0 15px #86efac;
+}
+
+h1 {
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  line-height: .99;
+  letter-spacing: -.075em;
+  margin-bottom: 26px;
+}
+
+.hero-desc {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 520px;
+  margin-bottom: 30px;
+}
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
+
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 45px;
+}
+
+.metric strong { display: block; font-size: 1.3rem; }
+.metric span { font-size: .78rem; color: var(--muted); }
+
+.visual {
+  position: relative;
+  min-height: 400px;
+  display: grid;
+  place-items: center;
+}
+
+.orbit {
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  border: 1px solid #a78bfa40;
+  border-radius: 50%;
+  box-shadow: 0 0 65px #8b5cfA12, inset 0 0 65px #8b5cfA0c;
+  animation: rotate 25s linear infinite;
+}
+
+.orbit.two {
+  width: 250px;
+  height: 380px;
+  transform: rotate(55deg);
+  border-color: #67e8f94a;
+  animation-duration: 19s;
+  animation-direction: reverse;
+}
+
+.orbit::before, .orbit::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 22px var(--cyan);
+  top: 12%;
+  left: 20%;
+}
+
+.orbit::after {
+  top: auto;
+  left: auto;
+  right: 5%;
+  bottom: 27%;
+  background: var(--pink);
+  box-shadow: 0 0 22px var(--pink);
+}
+
+.core {
+  position: relative;
+  width: 205px;
+  height: 205px;
+  border-radius: 36px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #a78bfa24, #67e8f90a);
+  border: 1px solid #c4b5fd54;
+  box-shadow: 0 0 85px #8b5cfA1c, inset 0 0 40px #a78bfa0b;
+  transform: rotate(-8deg);
+}
+
+.core-inner {
+  transform: rotate(8deg);
+  text-align: center;
+}
+
+.core-symbol {
+  font-size: 4.7rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -.1em;
+}
+
+.core-label { color: var(--cyan); }
+
+.float-card {
+  position: absolute;
+  background: #10101ee8;
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 15px;
+  box-shadow: 0 15px 50px #0005;
+}
+
+.float-card small { color: var(--muted); display: block; }
+.float-card strong { font-size: .9rem; }
+.float-a { top: 50px; right: 0; }
+.float-b { bottom: 45px; left: 0; }
+
+section { padding: 85px 0; border-top: 1px solid #ffffff0b; }
+
+.section-head { margin-bottom: 35px; }
+
+.section-kicker { color: var(--cyan); margin-bottom: 10px; }
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.15rem);
+  letter-spacing: -.055em;
+  line-height: 1.15;
+}
+
+.section-desc { color: var(--muted); margin-top: 13px; max-width: 590px; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  padding: 27px;
+  transition: border-color .25s, transform .25s;
+}
+
+.panel:hover { border-color: #a78bfa65; transform: translateY(-4px); }
+
+.panel p { color: var(--muted); margin-top: 13px; }
+
+.panel-icon { font-size: 1.6rem; margin-bottom: 15px; }
+
+.info-list { display: grid; gap: 14px; margin-top: 20px; }
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 11px;
+  font-size: .9rem;
+}
+
+.info-row span:first-child { color: var(--muted); }
+.info-row span:last-child { text-align: right; }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.skill {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 21px 13px;
+  text-align: center;
+  transition: .25s;
+}
+
+.skill:hover {
+  background: #a78bfa12;
+  border-color: var(--purple);
+  transform: translateY(-5px);
+}
+
+.skill-icon { font-size: 1.8rem; display: block; margin-bottom: 9px; }
+.skill strong { font-size: .9rem; }
+.skill small { display: block; color: var(--muted); margin-top: 5px; }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.project { overflow: hidden; }
+
+.project-top {
+  min-height: 145px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 23px;
+  background:
+    radial-gradient(circle at 50% 50%, #a78bfa30, transparent 50%),
+    linear-gradient(135deg, #17152d, #0d1b2b);
+  border: 1px solid #ffffff0b;
+}
+
+.project-top span { font-size: 3.2rem; filter: drop-shadow(0 0 20px #a78bfa65); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+
+.tag {
+  color: #c4b5fd;
+  background: #a78bfa12;
+  border: 1px solid #a78bfa25;
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem;
+}
+
+.project p { margin-top: 10px; }
+
+.project-link {
+  display: inline-block;
+  color: var(--cyan);
+  margin-top: 20px;
+  font-size: .87rem;
+}
+
+.project-link:hover { color: white; }
+
+.contact-panel {
+  text-align: center;
+  padding: 55px 25px;
+  background:
+    radial-gradient(ellipse at 50% 0%, #a78bfa20, transparent 65%),
+    var(--panel);
+}
+
+.contact-panel .section-desc { margin: 15px auto 25px; }
+
+.contact-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+
+footer { border-top: 1px solid var(--line); padding: 25px 0; }
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes rotate { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+@media (max-width: 760px) {
+  .menu-button { display: block; }
+  .nav-cta { display: none; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    background: #0b0b17;
+    border-bottom: 1px solid var(--line);
+    padding: 22px 5%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav-links.open { display: flex; }
+  .hero { grid-template-columns: 1fr; padding-top: 65px; gap: 10px; }
+  .visual { min-height: 340px; }
+  .orbit { width: 260px; height: 260px; }
+  .orbit.two { width: 205px; height: 310px; }
+  .core { width: 160px; height: 160px; }
+  .core-symbol { font-size: 3.6rem; }
+  .float-a { right: 0; top: 20px; }
+  .float-b { bottom: 20px; left: 0; }
+  .about-grid, .projects-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  section { padding: 65px 0; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 380px) {
+  .metrics { gap: 18px; }
+  .info-row { font-size: .8rem; }
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to My Portfolio</h1>
-        <p>Electronics and Telecommunication Engineering Student</p>
-    </header>
 
-    <main>
-        <h2>About Me</h2>
-        <p>Hello! I am an engineering student interested in
-        programming, web development and cloud computing.</p>
+<nav>
+  <div class="container nav-inner">
+    <a href="#home" class="logo">HG<span>.</span></a>
 
-        <h2>My Skills</h2>
-        <p>Java | Python | HTML | CSS | Flutter</p>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
 
-        <h2>My Project</h2>
-        <p>This is my first website deployed using AWS Amplify,
-        a cloud platform for hosting web applications.</p>
+    <a class="nav-cta" href="#contact">Let's connect ↗</a>
+    <button class="menu-button" id="menuButton"
+      aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  </div>
+</nav>
 
-        <a class="button"
-           href="https://aws.amazon.com/amplify/">
-           Explore AWS Amplify
-        </a>
-    </main>
+<main>
+  <div class="container hero" id="home">
+    <div class="hero-content">
+      <div class="eyebrow mono">
+        <span class="dot"></span>
+        ENGINEERING THE DIGITAL FUTURE
+      </div>
 
-    <footer>
-        My Student Portfolio | Cloud Computing Practical
-    </footer>
+      <h1>Building<br>what's <span class="gradient">next.</span></h1>
+
+      <p class="hero-desc">
+        Hey, I'm Harish Gangurde — an engineering student and developer
+        exploring the intersection of software, AI and cloud technology.
+        I turn ideas into digital experiences.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="button primary">Explore my work ↗</a>
+        <a href="#about" class="button">Discover my story ↓</a>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <strong>01<span class="gradient">.</span></strong>
+          <span>Curious mind</span>
+        </div>
+        <div class="metric">
+          <strong>∞</strong>
+          <span>Ideas to explore</span>
+        </div>
+        <div class="metric">
+          <strong>24/7</strong>
+          <span>Learning mindset</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="visual" aria-label="Animated futuristic digital core">
+      <div class="orbit"></div>
+      <div class="orbit two"></div>
+
+      <div class="core">
+        <div class="core-inner">
+          <div class="core-symbol gradient">HG</div>
+          <div class="core-label mono">DIGITAL CORE</div>
+        </div>
+      </div>
+
+      <div class="float-card float-a">
+        <small class="mono">CURRENT FOCUS</small>
+        <strong>Software + Cloud</strong>
+      </div>
+
+      <div class="float-card float-b">
+        <small class="mono">STATUS</small>
+        <strong><span style="color:#86efac">●</span> Always learning</strong>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="container reveal">
+      <div class="section-head">
+        <div class="section-kicker mono">01 / THE HUMAN BEHIND THE CODE</div>
+        <h2>A little about <span class="gradient">me.</span></h2>
+        <p class="section-desc">
+          Engineering isn't just about making things work.
+          It's about imagining better possibilities and bringing them to life.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <article class="panel">
+          <div class="panel-icon">✳</div>
+          <h3>The mindset</h3>
+          <p>
+            I'm pursuing Electronics and Telecommunication Engineering
+            while building my skills in software development, application
+            design and cloud computing. I enjoy solving problems and
+            learning by building real projects.
+          </p>
+          <p>
+            My goal is to create useful, reliable and thoughtful
+            technology that makes a difference.
+          </p>
+        </article>
+
+        <article class="panel">
+          <div class="panel-icon">⌘</div>
+          <h3>Quick information</h3>
+          <div class="info-list">
+            <div class="info-row">
+              <span>Discipline</span>
+              <span>E&TC Engineering</span>
+            </div>
+            <div class="info-row">
+              <span>Interests</span>
+              <span>AI, apps, cloud</span>
+            </div>
+            <div class="info-row">
+              <span>Languages</span>
+              <span>Java, Python, Dart</span>
+            </div>
+            <div class="info-row">
+              <span>Currently</span>
+              <span>Building & learning</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container reveal">
+      <div class="section-head">
+        <div class="section-kicker mono">02 / MY TOOLKIT</div>
+        <h2>Tools of the <span class="gradient">trade.</span></h2>
+        <p class="section-desc">
+          Technologies I'm learning and using to turn concepts into working software.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill"><span class="skill-icon">☕</span><strong>Java</strong><small>Programming</small></div>
+        <div class="skill"><span class="skill-icon">⌘</span><strong>Python</strong><small>AI & scripting</small></div>
+        <div class="skill"><span class="skill-icon">◈</span><strong>Flutter</strong><small>App development</small></div>
+        <div class="skill"><span class="skill-icon">🌐</span><strong>HTML & CSS</strong><small>Web development</small></div>
+        <div class="skill"><span class="skill-icon">⟡</span><strong>Firebase</strong><small>App backend</small></div>
+        <div class="skill"><span class="skill-icon">☁</span><strong>AWS</strong><small>Cloud hosting</small></div>
+        <div class="skill"><span class="skill-icon">⑂</span><strong>GitHub</strong><small>Version control</small></div>
+        <div class="skill"><span class="skill-icon">⌬</span><strong>SQL</strong><small>Databases</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container reveal">
+      <div class="section-head">
+        <div class="section-kicker mono">03 / SELECTED WORK</div>
+        <h2>Ideas made <span class="gradient">real.</span></h2>
+        <p class="section-desc">
+          A glimpse into the kinds of systems and experiences I'm interested in building.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="panel project">
+          <div class="project-top"><span>◉</span></div>
+          <div class="mono section-kicker">PROJECT / 001</div>
+          <h3>AuthShield</h3>
+          <p>
+            A two-layer authentication concept combining keypad access
+            and facial verification with an ESP32-CAM and mobile app alerts.
+          </p>
+          <div class="tags">
+            <span class="tag">ESP32-CAM</span>
+            <span class="tag">Flutter</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Supabase</span>
+          </div>
+        </article>
+
+        <article class="panel project">
+          <div class="project-top"><span>⌘</span></div>
+          <div class="mono section-kicker">PROJECT / 002</div>
+          <h3>AI Study Assistant</h3>
+          <p>
+            A retrieval-augmented learning assistant concept designed
+            to answer questions from study documents and support revision.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">RAG</span>
+            <span class="tag">LLMs</span>
+            <span class="tag">pgvector</span>
+          </div>
+        </article>
+
+        <article class="panel project">
+          <div class="project-top"><span>◇</span></div>
+          <div class="mono section-kicker">PROJECT / 003</div>
+          <h3>RailDine</h3>
+          <p>
+            A smart train food delivery concept connecting passenger
+            orders, staff workflows and a proposed automated delivery robot.
+          </p>
+          <div class="tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">ESP32</span>
+          </div>
+        </article>
+
+        <article class="panel project">
+          <div class="project-top"><span>✳</span></div>
+          <div class="mono section-kicker">PROJECT / 004</div>
+          <h3>Eventoria</h3>
+          <p>
+            An event management application concept for organizing
+            events, coordinating vendors and simplifying planning workflows.
+          </p>
+          <div class="tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">Gemini API</span>
+          </div>
+        </article>
+      </div>
+
+      <p class="section-desc" style="margin-top:20px;font-size:.8rem">
+        Project descriptions are summaries of project concepts; not every
+        feature is necessarily deployed or publicly accessible.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container reveal">
+      <div class="panel contact-panel">
+        <div class="section-kicker mono">04 / THE NEXT CONNECTION</div>
+        <h2>Have an idea?<br><span class="gradient">Let's build it.</span></h2>
+        <p class="section-desc">
+          Interested in technology, creative projects or collaborating
+          on something interesting? Find me online.
+        </p>
+
+        <div class="contact-actions">
+          <a class="button primary"
+             href="https://github.com/harishgangurde"
+             target="_blank" rel="noopener noreferrer">
+             GitHub ↗
+          </a>
+          <a class="button"
+             href="https://www.linkedin.com/in/harish-gangurde-0aa124320/"
+             target="_blank" rel="noopener noreferrer">
+             LinkedIn ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a href="#home" class="logo">HG<span>.</span></a>
+    <span>Designed with curiosity. Built for what's next.</span>
+    <span class="mono">© <span id="year"></span> HARISH GANGURDE</span>
+  </div>
+</footer>
+
+<script>
+const menuButton = document.getElementById('menuButton');
+const navLinks = document.getElementById('navLinks');
+
+menuButton.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  menuButton.setAttribute('aria-expanded', String(isOpen));
+  menuButton.textContent = isOpen ? '✕' : '☰';
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.textContent = '☰';
+  });
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+if ('IntersectionObserver' in window &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(element => {
+    observer.observe(element);
+  });
+} else {
+  document.querySelectorAll('.reveal').forEach(element => {
+    element.classList.add('visible');
+  });
+}
+</script>
+
 </body>
 </html>
-```
